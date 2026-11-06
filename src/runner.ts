@@ -1,3 +1,4 @@
+import { TierReplyKind } from './TierReplyKind';
 import { TierStatus } from './TierStatus';
 
 export interface WorkerLike {
@@ -7,8 +8,8 @@ export interface WorkerLike {
 }
 
 export type TierReply<R> =
-  | { kind: 'done'; id: number; ms: number; result?: R; error?: string; nGpuLayers?: number }
-  | { kind: 'progress'; tier: string; file: string; totalBytes: number };
+  | { kind: TierReplyKind.Done | `${TierReplyKind.Done}`; id: number; ms: number; result?: R; error?: string; nGpuLayers?: number }
+  | { kind: TierReplyKind.Progress | `${TierReplyKind.Progress}`; tier: string; file: string; totalBytes: number };
 
 export interface TierRunner<Q, R> {
   run(request: Q): Promise<R | TierStatus>;
@@ -33,7 +34,7 @@ export function createTierRunner<Q extends object, R>(makeWorker: () => WorkerLi
   };
   const onReply = (event: Event): void => {
     const data = (event as MessageEvent<TierReply<R>>).data;
-    if (data.kind !== 'done') {
+    if (data.kind !== TierReplyKind.Done) {
       return;
     }
     const settle = pending.get(data.id);
