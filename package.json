@@ -1,6 +1,6 @@
 {
   "name": "@dloizides/prompt-to-config",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Turn a free-text prompt into a validated config object: keyword table, sentence-embedding presets and a grammar-constrained in-browser LLM, with gap fill.",
   "license": "Apache-2.0",
   "repository": {
