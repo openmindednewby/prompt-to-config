@@ -1,0 +1,4 @@
+@dloizides/prompt-to-config
+Copyright 2026 Demetrios Loizides
+Builds on @dloizides/llm-run (Apache-2.0).
+Model weights are downloaded from Hugging Face at run time and are governed by each model's own licence.
